@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ {% include 'head_links.html' %}
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  {% include 'ticketAdmin_header.html' %}
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Update Ticket Status</h2>
+          <ol>
+            <li><a href="{% url 'Ticket_Admin:homepage' %}">Home</a></li>
+            <li>Update Status</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <center>
+      <div class="container">
+        <div class="col-lg-8 mt-5 mt-lg-0">
+          <div class="my-3">
+                <div class="sent-message text-warning">{{user_doesnt_exist}}</div>
+                <div class="sent-message text-danger">{{user_exists}}</div>
+          </div>
+
+            <form action="{% url 'Ticket_Admin:updateTicketStatus' %}" method="post" role="form">
+              {% csrf_token %}
+
+                <div class="col-md-4 form-group">
+                  <input type="hidden" name="id" value="{{ticket_data.id}}" class="form-control" id="ticket_id" required readonly>
+                </div>
+
+                <div class="col-md-4 form-group">
+                  <input type="hidden" name="user" value="{{ticket_data.user_id}}" class="form-control" id="user_id" required readonly>
+                </div>
+
+                <div class="col-md-8 form-group mt-3">
+                  <input type="text" name="title" class="form-control" id="title" placeholder="{{ticket_data.title}}" value="{{ticket_data.title}}" required readonly>
+                </div>
+
+
+              <div class="col-md-8 form-group mt-3">
+                <textarea class="form-control" rows="5" name="description" id="email" placeholder="{{ticket_data.description}}" required readonly>{{ticket_data.description}}</textarea>
+                </div>
+
+              <div>
+                Update Ticket Status:
+                  <select name="status" class="col-md-3 form-group mt-3 text-center">
+                    <option value="{{ticket_data.status}}">{{ticket_data.status}}</option>
+                    <option value="Status Update 1">Status Update 1</option>
+                    <option value="Status Update 2">Status Update 2</option>
+                    <option value="Status Update 3">Status Update 3</option>
+                  </select>
+                </div>
+
+              <div><input class="btn btn-primary col-md-2 mt-3" type="submit" value="Update Status"></div>
+            </form>
+           <div class="my-3">
+                <div class="error-message text-danger">{{error_message}}</div>
+              </div>
+          </div>
+      </div>
+         </center>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'footer.html' %}
+  <!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  {% include 'scripts.html' %}
+
+</body>
+
+</html>

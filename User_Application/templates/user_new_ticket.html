@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ {% include 'head_links.html' %}
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  {% include 'user_header.html' %}
+  <!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>New Ticket Submission</h2>
+          <ol>
+            <li><a href="{% url 'User_Application:homepage' %}">Home</a></li>
+            <li>New Ticket</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+      <center>
+      <div class="container">
+        <div class="col-lg-8 mt-5 mt-lg-0">
+          <div class="my-3">
+                <div class="sent-message text-warning">{{user_doesnt_exist}}</div>
+                <div class="sent-message text-danger">{{user_exists}}</div>
+          </div>
+
+            <form action="{% url 'User_Application:newTicketSubmission' %}" method="post" role="form">
+              {% csrf_token %}
+                <div class="col-md-4 form-group">
+                  <input type="hidden" name="user" value="{{user.id}}" class="form-control" id="user_id" required readonly>
+                </div>
+
+                <div class="col-md-8 form-group mt-3">
+                  <input type="text" name="title" class="form-control" id="title" placeholder="Summarise Your Issue" required>
+                </div>
+
+              <div class="col-md-8 form-group mt-3">
+                <textarea class="form-control" rows="5" name="description" id="email" placeholder="Describe your Issue" required></textarea>
+                </div>
+
+              <div><input class="btn btn-primary col-md-2 mt-3" type="submit" value="Raise a Ticket"></div>
+            </form>
+           <div class="my-3">
+                <div class="error-message text-danger">{{error_message}}</div>
+              </div>
+          <div class="sent-message mt-3"><p>Raised a Ticket Earlier? &nbsp;<a class="getstarted" href="{% url 'User_Application:viewTickets' %}"><u>Check Status</u></a></p></div>
+          </div>
+      </div>
+         </center>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'footer.html' %}
+  <!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  {% include 'scripts.html' %}
+
+</body>
+
+</html>
