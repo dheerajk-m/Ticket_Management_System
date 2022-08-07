@@ -9,10 +9,12 @@ def login(request):
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
+
         if username == "Admin" and password == "TicketAdmin@123":
             request.session["username"] = username
             context = {"login_success": "Welcome Ticket Admin"}
             return render(request, "admin_homepage.html", context)
+
         else:
             context = {"invalid_credentials": "You have entered Invalid Credentials :("}
             return render(request, "admin_login.html", context)
@@ -55,6 +57,7 @@ def edit_ticket_status(request, ticket_id):
         ticket_data = UserTicket.objects.get(id=ticket_id)
         context = {"ticket_data": ticket_data}
         return render(request, "admin_edit_ticket-status.html", context)
+
     else:
         context = {"not_logged_in": "Admin not logged in :/ Please login to continue :D"}
         return render(request, "admin_login.html", context)
