@@ -1733,6 +1733,12 @@ section {
   margin-top: 72px;
 }
 
+.inner-page {
+  min-height: 100px;
+  margin-top: 72px;
+  margin-bottom: 100px;
+}
+
 @media (max-width: 992px) {
   .breadcrumbs {
     margin-top: 58px;

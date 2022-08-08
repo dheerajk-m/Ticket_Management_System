@@ -30,7 +30,7 @@
 
     <section class="inner-page">
       <div class="container">
-        <div class="col-lg-8 mt-5 mt-lg-0">
+        <div class="col-lg-8 mt-2 mt-lg-0">
           <div class="my-3">
                 <div class="sent-message text-success">{{success}}</div>
                 <div class="error-message text-warning">{{not_logged_in}}</div>
@@ -53,12 +53,15 @@
           <div class="sent-message mt-3"><p>Not a member? Get registered with us &nbsp;<a class="getstarted" href="{% url 'User_Application:registration' %}"><u>Register here</u></a></p></div>
           </div>
       </div>
+
     </section>
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
+
   {% include 'footer.html' %}
+
   <!-- End Footer -->
 
   <div id="preloader"></div>
