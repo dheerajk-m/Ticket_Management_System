@@ -11,13 +11,12 @@ def login(request):
         # requesting data from the user
         email = request.POST["email_id"]
         password = request.POST["password"]
-        email_count = UserRegistrationData.objects.filter(email_id=email)
         user_count = UserRegistrationData.objects.filter(email_id=email, password=password)
 
         # Initiating Exception Handling
         try:
             # Checking whether a user is registered with the given Email
-            if len(email_count) == 0:
+            if UserRegistrationData.objects.filter(email_id=email).exists():
                 context = {"user_doesnt_exist": "An account with " + email + " doesn't Exist. Please Register!"}
                 return render(request, "user_registration.html", context)
             # Checking whether the given email and password match
@@ -44,13 +43,13 @@ def login(request):
 def registration(request):
     if request.method == "POST":
         email = request.POST["email_id"]
-        email_count = UserRegistrationData.objects.filter(email_id=email)
+
         try:
             user_form_data = UserRegistrationDataForm(request.POST)
             print("User Form Data Errors: ", user_form_data.errors)
 
             # Filtering Duplicate Email Registration
-            if len(email_count) == 1:
+            if UserRegistrationData.objects.filter(email_id=email).exists():
                 context = {"user_exists": "User with " + email +
                                           "already exists! Please register with another email :)"}
                 return render(request, "user_registration.html", context)
